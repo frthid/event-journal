@@ -15,18 +15,19 @@ interface ITodo {
 interface ITodoItemProps {
   todo: ITodo;
   checkTodo: (id: ITodo['id']) => void;
+  deleteTodo: (id: ITodo['id']) => void;
 }
 
-const TodoItem: React.FC<ITodoItemProps> = ({ todo, checkTodo }) => {
-  const { date, equipment, importance, message, responsible, checked } = todo;
+const TodoItem: React.FC<ITodoItemProps> = ({ todo, checkTodo, deleteTodo}) => {
+  const { id, date, equipment, importance, message, responsible, checked } = todo;
   const formattedDate = date ? date.toLocaleString() : 'Нет даты';
 
   return (
-    <div className={classes.item} onClick={() => checkTodo(todo.id)}>
+    <div className={`${classes.item} ${checked ? classes.checked : ''}`} onClick={() => checkTodo(id)}>
       <div className={classes.item__content}>
         <div className={classes.item__content__unit}>
           <strong>Статус:</strong>
-          <em style={{ textDecoration: checked ? 'line-through' : 'none' }}>
+          <em style={{ textDecoration: checked ? 'line-through' : 'none', textDecorationThickness: checked ? '1px' : 'auto' }}>
             {checked ? 'Прочитано' : 'Не прочитано'}
           </em>
         </div>
@@ -53,7 +54,7 @@ const TodoItem: React.FC<ITodoItemProps> = ({ todo, checkTodo }) => {
       </div>
       <div className={classes.item__action}>
         <FaUserCircle className={classes.item__action__icon} />
-        <Button text='Удалить' type='button' color='delete' />
+        <Button text='Удалить' type='button' color='delete' onClick={() => deleteTodo(id)}/>
       </div>
     </div>
   );

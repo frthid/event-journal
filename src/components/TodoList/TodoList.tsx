@@ -15,13 +15,14 @@ interface ITodo {
 interface ITodoListProps {
   todos: ITodo[];
   checkTodo: (id: ITodo['id']) => void;
+  deleteTodo: (id: ITodo['id']) => void;
 }
 
-const TodoList: React.FC<ITodoListProps> = ({ todos, checkTodo }) => {
+const TodoList: React.FC<ITodoListProps> = ({ todos, checkTodo, deleteTodo }) => {
   return (
     <div className={classes.list}>
       {todos.map((todo, index) => (
-        <TodoItem key={index} todo={todo} checkTodo={checkTodo} />
+        <TodoItem key={index} todo={todo} checkTodo={checkTodo} deleteTodo={deleteTodo} />
       ))}
     </div>
   );

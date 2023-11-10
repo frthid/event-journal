@@ -70,10 +70,14 @@ const MainPage = () => {
     );
   };
 
+  const deleteTodo = (id: ITodo['id']) => {
+    setTodo(todos.filter(todo => todo.id !== id))
+  }
+
   return (
     <div>
       <Control addTodo={addTodo} />
-      <TodoList todos={todos} checkTodo={checkTodo} />
+      <TodoList todos={todos} checkTodo={checkTodo} deleteTodo={deleteTodo} />
     </div>
   );
 };
