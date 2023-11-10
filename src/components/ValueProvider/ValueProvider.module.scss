@@ -1,0 +1,12 @@
+@import '../../styles/variables.scss';
+
+.section {
+  display: flex;
+  flex-direction: column;
+  
+  &__label {
+    color: $text-main;
+    font-size: 15px;
+    padding: 15px 0 5px 0;
+  }
+}

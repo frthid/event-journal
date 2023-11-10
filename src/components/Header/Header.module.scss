@@ -1,0 +1,8 @@
+@import '../../styles/variables.scss';
+
+.header {
+  width: 100%;
+  height: 100px;
+  background: $header;
+  color: $text-comp;
+}

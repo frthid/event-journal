@@ -1,0 +1,35 @@
+@import '../../../../styles/variables.scss';
+
+.date {
+  position: relative;
+  display: flex;
+
+  &__input {
+    width: 100%;
+    padding: 10px;
+    background: $main;
+    font-style: italic;
+    font-size: 12px;
+    border-radius: 5px;
+    border: 1px solid $main;
+    box-shadow: 3px 3px 10px 6px rgba(0, 0, 0, 0.06);
+    transition: all 0.2s;
+
+    &:hover {
+      background: darken($main, 8%);
+    }
+
+    &:focus {
+      background: darken($main, 8%);
+      outline: none;
+    }
+  }
+
+  &__btn {
+    position: absolute;
+    top: 55%;
+    right: 10px;
+    transform: translateY(-50%);
+  }
+
+}
