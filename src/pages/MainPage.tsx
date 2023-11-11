@@ -1,4 +1,3 @@
-// import classes from './MainPage.module.scss';
 import Control from '../components/Control/Control';
 import TodoList from '../components/TodoList/TodoList';
 import { useState } from 'react';
@@ -23,6 +22,8 @@ const DEFAULT_TODO_LIST = [
     checked: false,
   },
 ];
+
+// const DEFAULT_TODO_LIST = [{}];
 
 interface ITodo {
   id: number;
@@ -71,7 +72,7 @@ const MainPage = () => {
   };
 
   const deleteTodo = (id: ITodo['id']) => {
-    setTodo(todos.filter(todo => todo.id !== id))
+    setTodo([...todos.filter(todo => todo.id !== id)])
   }
 
   return (

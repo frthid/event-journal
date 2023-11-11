@@ -22,6 +22,11 @@ const TodoItem: React.FC<ITodoItemProps> = ({ todo, checkTodo, deleteTodo}) => {
   const { id, date, equipment, importance, message, responsible, checked } = todo;
   const formattedDate = date ? date.toLocaleString() : 'Нет даты';
 
+  const handleDeleteClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.stopPropagation();
+    deleteTodo(id);
+  }
+
   return (
     <div className={`${classes.item} ${checked ? classes.checked : ''}`} onClick={() => checkTodo(id)}>
       <div className={classes.item__content}>
@@ -54,7 +59,7 @@ const TodoItem: React.FC<ITodoItemProps> = ({ todo, checkTodo, deleteTodo}) => {
       </div>
       <div className={classes.item__action}>
         <FaUserCircle className={classes.item__action__icon} />
-        <Button text='Удалить' type='button' color='delete' onClick={() => deleteTodo(id)}/>
+        <Button text='Удалить' type='button' color='delete' onClick={handleDeleteClick}/>
       </div>
     </div>
   );
