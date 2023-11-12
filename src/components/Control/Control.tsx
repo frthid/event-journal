@@ -3,6 +3,7 @@ import Button from '../UI/Button/Button'
 import classes from './Control.module.scss';
 import Popup from '../Popup/Popup';
 import TodoCreator from '../TodoCreator/TodoCreator';
+// import Input from '../UI/Input/Input';
 
 interface ITodo {
   id: number;
@@ -15,7 +16,7 @@ interface ITodo {
 }
 
 interface ITodoControl {
-  addTodo: ({date, importance, equipment, message, responsible}: Omit<ITodo, 'id' | 'checked' >) => void;
+  addTodo: ({importance, equipment, message, responsible}: Omit<ITodo, 'id' | 'checked' | 'date'>) => void;
 }
 
 const Control: React.FC<ITodoControl> = ({addTodo}) => {
@@ -28,12 +29,11 @@ const Control: React.FC<ITodoControl> = ({addTodo}) => {
   return (
     <>
     <div className={classes.control}>
-      <p>toggle</p>
+      {/* <Input /> */}
       <Popup popupOpen={popupOpen} setPopupOpen={setPopupOpen}>
         <TodoCreator addTodo={addTodo} />
       </Popup>
       <Button type='button' text='Создать событие'onClick={handleClick}/>
-      <p>search</p>
     </div>  
     </>
   )

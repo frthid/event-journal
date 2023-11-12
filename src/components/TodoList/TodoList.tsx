@@ -2,7 +2,7 @@ import TodoItem from './TodoItem/TodoItem';
 import classes from './TodoList.module.scss';
 import ReactPaginate from 'react-paginate';
 import { useState } from 'react';
-import {GrFormNext, GrFormPrevious} from 'react-icons/gr'
+import { GrFormNext, GrFormPrevious } from 'react-icons/gr';
 
 interface ITodo {
   id: number;
@@ -21,13 +21,13 @@ interface ITodoListProps {
 }
 
 const TodoList: React.FC<ITodoListProps> = ({ todos, checkTodo, deleteTodo }) => {
-  const [itemsPerPage] = useState(6)
+  const [itemsPerPage] = useState(6);
   const [itemOffset, setItemOffset] = useState<number>(0);
   const endOffset = itemOffset + itemsPerPage;
   const currentItems = todos.slice(itemOffset, endOffset);
   const pageCount = Math.ceil(todos.length / itemsPerPage);
 
-  const handlePageClick = (e) => {
+  const handlePageClick = (e: any) => {
     const newOffset = (e.selected * itemsPerPage) % todos.length;
     setItemOffset(newOffset);
   };
@@ -35,10 +35,17 @@ const TodoList: React.FC<ITodoListProps> = ({ todos, checkTodo, deleteTodo }) =>
   return (
     <>
       <div className={classes.list}>
-        {currentItems &&
-          currentItems.map((todo, index) => (
-            <TodoItem key={index} todo={todo} checkTodo={checkTodo} deleteTodo={deleteTodo} />
-          ))}
+        {currentItems.length > 0 ? (
+          <div className={classes.list__items}>
+            {currentItems.map((todo, index) => (
+              <TodoItem key={index} todo={todo} checkTodo={checkTodo} deleteTodo={deleteTodo} />
+            ))}
+          </div>
+        ) : (
+          <div className={classes.list__default}>
+            <h3>Журнал пустой, создайте событие!</h3>
+          </div>
+        )}
       </div>
       <ReactPaginate
         breakLabel='...'

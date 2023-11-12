@@ -3,7 +3,7 @@ import ValueProvider from '../ValueProvider/ValueProvider';
 import Button from '../UI/Button/Button';
 import Input from '../UI/Input/Input';
 import Dropdown from '../UI/Dropdown/Dropdown';
-import Datepicker from '../UI/DatePicker/Datepicker';
+// import Datepicker from '../UI/DatePicker/Datepicker';
 import classes from './TodoCreator.module.scss';
 
 interface ITodo {
@@ -27,7 +27,7 @@ const DEFAULT_TODO = {
 };
 
 interface ITodoControl {
-  addTodo: ({date, importance, equipment, message, responsible}: Omit<ITodo, 'id' | 'checked' >) => void;
+  addTodo: ({importance, equipment, message, responsible}: Omit<ITodo, 'id' | 'checked' | 'date'>) => void;
 }
 
 const TodoCreator: React.FC<ITodoControl> = ({ addTodo }) => {
@@ -39,7 +39,6 @@ const TodoCreator: React.FC<ITodoControl> = ({ addTodo }) => {
 
   const onClick = () => {
     addTodo({
-      date: todo.date,
       importance: todo.importance,
       equipment: todo.equipment,
       message: todo.message,
@@ -50,9 +49,6 @@ const TodoCreator: React.FC<ITodoControl> = ({ addTodo }) => {
 
   return (
     <section className={classes.section}>
-      <ValueProvider title='Дата' labelFor='date'>
-        <Datepicker value={todo.date} onChange={(value) => handleTodoChange('date', value)} />
-      </ValueProvider>
       <ValueProvider title='Важность' labelFor='importance'>
         <Dropdown
           value={todo.importance}

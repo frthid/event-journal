@@ -2,28 +2,7 @@ import Control from '../components/Control/Control';
 import TodoList from '../components/TodoList/TodoList';
 import { useState } from 'react';
 
-const DEFAULT_TODO_LIST = [
-  {
-    id: 1,
-    date: null,
-    importance: 'Низкая',
-    equipment: 'Травмат',
-    message: 'Помогите',
-    responsible: 'Федосеев',
-    checked: true,
-  },
-  {
-    id: 2,
-    date: null,
-    importance: 'Высокая',
-    equipment: 'Пила',
-    message: 'Я мастер спорта',
-    responsible: 'Рогов',
-    checked: false,
-  },
-];
-
-// const DEFAULT_TODO_LIST = [{}];
+const DEFAULT_TODO_LIST: ITodo[] = [];
 
 interface ITodo {
   id: number;
@@ -37,20 +16,18 @@ interface ITodo {
 
 const MainPage = () => {
   const [todos, setTodo] = useState<ITodo[]>(DEFAULT_TODO_LIST);
-  console.log(todos);
 
   const addTodo = ({
-    date,
     importance,
     equipment,
     message,
     responsible,
-  }: Omit<ITodo, 'id' | 'checked'>) => {
+  }: Omit<ITodo, 'id' | 'checked' | 'date'>) => {
     setTodo([
       ...todos,
       {
-        id: todos[todos.length - 1].id + 1,
-        date,
+        id: todos.length > 0 ? todos[todos.length - 1].id + 1 : 1,
+        date: new Date(),
         importance,
         equipment,
         message,
