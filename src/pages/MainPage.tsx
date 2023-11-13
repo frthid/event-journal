@@ -16,6 +16,7 @@ interface ITodo {
 
 const MainPage = () => {
   const [todos, setTodo] = useState<ITodo[]>(DEFAULT_TODO_LIST);
+  const [searchMessage, setSearchMessage] = useState<string>('');
 
   const addTodo = ({
     importance,
@@ -54,8 +55,8 @@ const MainPage = () => {
 
   return (
     <div>
-      <Control addTodo={addTodo} />
-      <TodoList todos={todos} checkTodo={checkTodo} deleteTodo={deleteTodo} />
+      <Control addTodo={addTodo} searchMessage={searchMessage} setSearchMessage={setSearchMessage}/>
+      <TodoList todos={todos} checkTodo={checkTodo} deleteTodo={deleteTodo} searchMessage={searchMessage} />
     </div>
   );
 };

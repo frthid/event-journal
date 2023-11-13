@@ -16,19 +16,20 @@ interface ITodo {
 
 interface ITodoListProps {
   todos: ITodo[];
+  searchMessage: string;
   checkTodo: (id: ITodo['id']) => void;
   deleteTodo: (id: ITodo['id']) => void;
 }
 
-const TodoList: React.FC<ITodoListProps> = ({ todos, checkTodo, deleteTodo }) => {
-  const [itemsPerPage] = useState(6);
+const TodoList: React.FC<ITodoListProps> = ({ todos, checkTodo, deleteTodo, searchMessage }) => {
+  const [itemsPerPage] = useState(9);
   const [itemOffset, setItemOffset] = useState<number>(0);
   const endOffset = itemOffset + itemsPerPage;
   const currentItems = todos.slice(itemOffset, endOffset);
   const pageCount = Math.ceil(todos.length / itemsPerPage);
 
-  const handlePageClick = (e: any) => {
-    const newOffset = (e.selected * itemsPerPage) % todos.length;
+  const handlePageClick = ({ selected }: { selected: number }) => {
+    const newOffset = (selected * itemsPerPage) % todos.length;
     setItemOffset(newOffset);
   };
 
@@ -37,9 +38,17 @@ const TodoList: React.FC<ITodoListProps> = ({ todos, checkTodo, deleteTodo }) =>
       <div className={classes.list}>
         {currentItems.length > 0 ? (
           <div className={classes.list__items}>
-            {currentItems.map((todo, index) => (
-              <TodoItem key={index} todo={todo} checkTodo={checkTodo} deleteTodo={deleteTodo} />
-            ))}
+            {currentItems.map((todo, index) => {
+              if (!searchMessage) {
+                return (
+                  <TodoItem key={index} todo={todo} checkTodo={checkTodo} deleteTodo={deleteTodo} />
+                );
+              } else if (todo.message.toLowerCase().includes(searchMessage.toLowerCase())) {
+                return (
+                  <TodoItem key={index} todo={todo} checkTodo={checkTodo} deleteTodo={deleteTodo} />
+                );
+              }
+            })}
           </div>
         ) : (
           <div className={classes.list__default}>
@@ -51,7 +60,7 @@ const TodoList: React.FC<ITodoListProps> = ({ todos, checkTodo, deleteTodo }) =>
         breakLabel='...'
         nextLabel={<GrFormNext />}
         onPageChange={handlePageClick}
-        pageRangeDisplayed={5}
+        pageRangeDisplayed={9}
         pageCount={pageCount}
         previousLabel={<GrFormPrevious />}
         renderOnZeroPageCount={null}
