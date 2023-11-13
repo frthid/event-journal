@@ -5,3 +5,13 @@
   align-items: center;
   justify-content: space-between;
 }
+
+@media (max-width: 450px) {
+  .control {
+    height: 180px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 100%;
+  }   
+}
