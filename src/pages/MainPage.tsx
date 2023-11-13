@@ -1,18 +1,7 @@
 import Control from '../components/Control/Control';
 import TodoList from '../components/TodoList/TodoList';
 import { useState } from 'react';
-
-const DEFAULT_TODO_LIST: ITodo[] = [];
-
-interface ITodo {
-  id: number;
-  date: Date | null;
-  importance: string;
-  equipment: string;
-  message: string;
-  responsible: string;
-  checked: boolean;
-}
+import { AddTodoArgs, ITodo, DEFAULT_TODO_LIST } from '../models/models';
 
 const MainPage = () => {
   const [todos, setTodo] = useState<ITodo[]>(DEFAULT_TODO_LIST);
@@ -24,7 +13,7 @@ const MainPage = () => {
     equipment,
     message,
     responsible,
-  }: Omit<ITodo, 'id' | 'checked' | 'date'>) => {
+  }: AddTodoArgs) => {
     setTodo([
       ...todos,
       {

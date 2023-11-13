@@ -4,16 +4,7 @@ import ReactPaginate from 'react-paginate';
 import { useState } from 'react';
 import { GrFormNext, GrFormPrevious } from 'react-icons/gr';
 import TodoTable from './TodoTable/TodoTable';
-
-interface ITodo {
-  id: number;
-  date: Date | null;
-  importance: string;
-  equipment: string;
-  message: string;
-  responsible: string;
-  checked: boolean;
-}
+import { ITodo } from '../../models/models';
 
 interface ITodoListProps {
   todos: ITodo[];

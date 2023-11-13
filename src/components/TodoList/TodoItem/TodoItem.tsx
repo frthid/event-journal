@@ -2,16 +2,7 @@ import { useState, useEffect } from 'react';
 import Button from '../../UI/Button/Button';
 import classes from './TodoItem.module.scss';
 import { FaUserCircle } from 'react-icons/fa';
-
-interface ITodo {
-  id: number;
-  date: Date | null;
-  importance: string;
-  equipment: string;
-  message: string;
-  responsible: string;
-  checked: boolean;
-}
+import { ITodo } from '../../../models/models';
 
 interface ITodoItemProps {
   todo: ITodo;
@@ -30,7 +21,7 @@ const TodoItem: React.FC<ITodoItemProps> = ({ todo, checkTodo, deleteTodo }) => 
   };
 
   const handleCheckedClick = () => {
-    checkTodo(todo.id)
+    checkTodo(id)
   }
 
   const handleMouseEnter = () => {
@@ -44,7 +35,7 @@ const TodoItem: React.FC<ITodoItemProps> = ({ todo, checkTodo, deleteTodo }) => 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (isPress && (e.key === ' ' || e.key === 'Space')) {
-        checkTodo(todo.id);
+        checkTodo(id);
       }
     }; 
 
@@ -53,7 +44,7 @@ const TodoItem: React.FC<ITodoItemProps> = ({ todo, checkTodo, deleteTodo }) => 
     return () => {
       document.removeEventListener('keydown', handleKeyDown);
     };
-  }, [isPress, todo.id, checkTodo]);
+  }, [isPress, id, checkTodo]);
 
   return (
     <div

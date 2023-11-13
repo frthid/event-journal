@@ -1,11 +1,6 @@
 import React from 'react';
 import classes from './ValueProvider.module.scss'
-
-interface IValueSection {
-  title?: string;
-  labelFor: string;
-  children: React.ReactNode;
-}
+import {IValueSection} from './ValueProvider.d';
 
 const ValueProvider: React.FC<IValueSection> = ({ children, title = '', labelFor }) => {
   return (

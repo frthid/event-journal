@@ -1,17 +1,7 @@
 import React from 'react';
 import classes from './TodoTable.module.scss';
 import { GrCheckbox, GrCheckboxSelected } from 'react-icons/gr';
-
-interface ITodo {
-  id: number;
-  date: Date | null;
-  importance: string;
-  equipment: string;
-  message: string;
-  responsible: string;
-  checked: boolean;
-}
-
+import { ITodo } from '../../../models/models';
 
 interface ITodoTableProps {
   currentItems: ITodo[];

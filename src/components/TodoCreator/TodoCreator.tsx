@@ -3,35 +3,16 @@ import ValueProvider from '../ValueProvider/ValueProvider';
 import Button from '../UI/Button/Button';
 import Input from '../UI/Input/Input';
 import Dropdown from '../UI/Dropdown/Dropdown';
-// import Datepicker from '../UI/DatePicker/Datepicker';
 import classes from './TodoCreator.module.scss';
-
-interface ITodo {
-  id: number;
-  date: Date | null;
-  importance: string;
-  equipment: string;
-  message: string;
-  responsible: string;
-  checked: boolean;
-}
-
-const DEFAULT_TODO = {
-  id: 1,
-  date: null,
-  importance: '',
-  equipment: '',
-  message: '',
-  responsible: '',
-  checked: false,
-};
+import { AddTodoArgs, DEFAULT_TODO, ITodo } from '../../models/models';
 
 interface ITodoControl {
-  addTodo: ({importance, equipment, message, responsible}: Omit<ITodo, 'id' | 'checked' | 'date'>) => void;
+  addTodo: ({importance, equipment, message, responsible}: AddTodoArgs) => void;
 }
 
 const TodoCreator: React.FC<ITodoControl> = ({ addTodo }) => {
   const [todo, setTodo] = useState<ITodo>(DEFAULT_TODO);
+  const {importance, equipment, message, responsible} = todo;
 
   const handleTodoChange = (name: keyof ITodo, value: string | Date | null) => {
     setTodo((prevTodo) => ({ ...prevTodo, [name]: value }));
@@ -39,10 +20,10 @@ const TodoCreator: React.FC<ITodoControl> = ({ addTodo }) => {
 
   const onClick = () => {
     addTodo({
-      importance: todo.importance,
-      equipment: todo.equipment,
-      message: todo.message,
-      responsible: todo.responsible,
+      importance: importance,
+      equipment: equipment,
+      message: message,
+      responsible: responsible,
     })
     setTodo(DEFAULT_TODO)
   }
@@ -51,7 +32,7 @@ const TodoCreator: React.FC<ITodoControl> = ({ addTodo }) => {
     <section className={classes.section}>
       <ValueProvider title='Важность' labelFor='importance'>
         <Dropdown
-          value={todo.importance}
+          value={importance}
           onChange={(value) => handleTodoChange('importance', value)}
         />
       </ValueProvider>
@@ -59,7 +40,7 @@ const TodoCreator: React.FC<ITodoControl> = ({ addTodo }) => {
         <Input
           type='text'
           id='equipment'
-          value={todo.equipment}
+          value={equipment}
           name='equipment'
           placeholder='Введите оборудование'
           onChange={(value) => handleTodoChange('equipment', value)}
@@ -69,7 +50,7 @@ const TodoCreator: React.FC<ITodoControl> = ({ addTodo }) => {
         <Input
           type='text'
           id='message'
-          value={todo.message}
+          value={message}
           name='message'
           placeholder='Оставьте сообщение'
           onChange={(value) => handleTodoChange('message', value)}
@@ -79,7 +60,7 @@ const TodoCreator: React.FC<ITodoControl> = ({ addTodo }) => {
         <Input
           type='text'
           id='responsible'
-          value={todo.responsible}
+          value={responsible}
           name='responsible'
           placeholder='ФИО'
           onChange={(value) => handleTodoChange('responsible', value)}

@@ -5,17 +5,7 @@ import Popup from '../Popup/Popup';
 import TodoCreator from '../TodoCreator/TodoCreator';
 import Input from '../UI/Input/Input';
 import Toggle from '../UI/Toggle/Toggle';
-// import _ from 'lodash';
-
-interface ITodo {
-  id: number;
-  date: Date | null;
-  importance: string;
-  equipment: string;
-  message: string;
-  responsible: string;
-  checked: boolean;
-}
+import { AddTodoArgs } from '../../models/models';
 
 interface ITodoControl {
   addTodo: ({
@@ -23,7 +13,7 @@ interface ITodoControl {
     equipment,
     message,
     responsible,
-  }: Omit<ITodo, 'id' | 'checked' | 'date'>) => void;
+  }: AddTodoArgs) => void;
   searchMessage: string;
   setToggle: Dispatch<SetStateAction<string>>;
   setSearchMessage: Dispatch<SetStateAction<string>>;
@@ -41,12 +31,7 @@ const Control: React.FC<ITodoControl> = ({ addTodo, searchMessage, setSearchMess
     setToggle((prevToggle: string) => (prevToggle === 'card' ? 'table' : 'card'));
   }
 
-  // const handleDebouncedSearch = _.debounce((value) => {
-  //   console.log('пошло добро', value)
-  // }, 1000)
-
   const handleInputChange = (value: string) => {
-    // handleDebouncedSearch(value)
     setSearchMessage(value)
   }
 

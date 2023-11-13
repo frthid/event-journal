@@ -1,14 +1,6 @@
 import React, { ChangeEvent } from 'react';
 import classes from './Input.module.scss';
-
-interface IInputProps {
-  id: string;
-  value: string;
-  type: string;
-  name: string;
-  placeholder?: string; 
-  onChange: (value: string) => void;
-}
+import {IInputProps} from './Input.d'
 
 const Input: React.FC<IInputProps> = ({ type, id, value, name, placeholder, onChange }) => {
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
