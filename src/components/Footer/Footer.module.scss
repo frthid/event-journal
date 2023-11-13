@@ -3,4 +3,19 @@
 .footer {
   background: $footer;
   color: $text-comp;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 60px;
+
+  &__link {
+      margin-top: 5px;
+  
+    a {
+      padding: 3px;
+      font-size: 20px;
+      color: #ffff;
+    }
+  }
 }

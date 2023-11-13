@@ -1,0 +1,27 @@
+@import '../../../styles/variables.scss';
+
+.table {
+  width: 100%;
+  border: 1px solid $header;
+
+  thead {
+    background: $main;
+    th {
+      color: $text-main;
+      padding: 5px;
+    }
+  }
+
+  tbody {
+
+    td {
+      color: $text-main;
+      padding: 5px;
+      border: 1px solid $main;
+    }
+
+    &:hover {
+      background: darken($main, 4%);
+    }
+  }
+}

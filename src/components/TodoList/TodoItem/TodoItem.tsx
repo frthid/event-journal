@@ -55,9 +55,6 @@ const TodoItem: React.FC<ITodoItemProps> = ({ todo, checkTodo, deleteTodo }) => 
     };
   }, [isPress, todo.id, checkTodo]);
 
-
-  
- 
   return (
     <div
       className={`${classes.item} ${checked ? classes.checked : ''}`}

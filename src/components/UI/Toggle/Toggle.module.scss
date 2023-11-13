@@ -1,0 +1,23 @@
+@import '../../../styles/variables.scss';
+
+.btn {
+  background: $main;
+  color: $text-main;
+  min-height: 10px;
+  min-width: 50px;
+  padding: 10px;
+  overflow: visible;
+  font-size: 12px;
+  cursor: pointer;
+  border: 1px solid $main;
+  border-radius: 5px;
+  box-shadow: 3px 3px 10px 6px rgba(0, 0, 0, 0.06);
+  font-weight: 600;
+  transition: all 0.2s;
+
+  &:hover {
+    background: darken($main, 4%);
+    border: 1px solid $main;
+  }
+  
+}
